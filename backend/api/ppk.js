@@ -66,9 +66,23 @@ router.post('/postBarang',(req,res,next)=>{
 
 /*
 {
-    
+    "idBarang": 231,
+    "namaBarang": "pentol",
+    "batasSewa": "2018-11-29T02:36:47.697Z"
 }
 */
 
+router.post('/postSewa',(req,res,next)=>{
+    console.log(req.user);
+    let query="insert into sewa(idUser,idBarang,namaBarang,batasSewa,username)" +
+    "values("+req.user._id+","+req.body.idBarang+",'"+req.body.namaBarang+"','"+req.body.batasSewa+"','"+req.user.username+"')"
+    console.log(query);
+    knex.schema.raw(query).then(ress=>{
+        res.json('done');
+    }).catch(err=>{
+        res.status(404);
+        res.json(err);
+    })
+})
 
 module.exports = router;
