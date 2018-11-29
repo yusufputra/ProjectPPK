@@ -25,6 +25,16 @@ router.get('/getBarang',(req,res,next)=>{
     })
 })
 
+router.get('/getSewa',(req,res,next)=>{
+    const query= "Select * from sewa"
+    console.log(query);
+    knex.schema.raw(query).then(ress=>{
+        res.json(ress);
+    }).catch(err=>{
+        res.status(404).json(err);
+    })
+})
+
 
 
 
@@ -54,7 +64,11 @@ router.post('/postBarang',(req,res,next)=>{
     })
 })
 
-
+/*
+{
+    
+}
+*/
 
 
 module.exports = router;
