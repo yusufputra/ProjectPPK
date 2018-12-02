@@ -25,6 +25,21 @@ router.get('/getBarang',(req,res,next)=>{
     })
 })
 
+/*
+    "idUser" : 123
+*/
+
+router.get('/getOwnBarang',(req,res,next)=>{
+    const query= "Select * from Barang where idUser = " + req.body.idUser;
+    console.log(query);
+    knex.schema.raw(query).then(ress=>{
+        res.json(ress);
+    }).catch(err=>{
+        res.status(404).json(err);
+    })
+})
+
+
 router.get('/getSewa',(req,res,next)=>{
     const query= "Select * from sewa"
     console.log(query);
@@ -44,7 +59,7 @@ router.get('/getSewa',(req,res,next)=>{
 
 {
     "namaBarang": "Coba dari Backend 2",
-    "stokBarang": "Mari kita coba apakah bisa pada percobaan ke 2 ini"
+    "stokBarang": 5
 }
  make sure you pass with right key , so backend can catch your pass , otherwise
  it will return an error

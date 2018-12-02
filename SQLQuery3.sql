@@ -25,3 +25,25 @@ alter table Barang
 	add username varchar(32) not null
 
 select * from Barang
+
+create table sewa(
+	idSewa int identity not null primary key,
+	idUser int not null foreign key references userAdmin(idUser),
+	idBarang int not null foreign key references Barang(idBarang),
+	namaBarang varchar(100),
+	tanggalSewa datetime,
+	batasSewa datetime
+)
+
+alter table sewa
+	add constraint TS_swa default getdate() for tanggalSewa
+
+alter table sewa
+	add username varchar(32)
+
+insert into sewa(idUser,idBarang,namaBarang,batasSewa) values (1,5,'Hamok',getdate())
+update sewa set username = 'acil' where idSewa = 2
+
+select * from sewa
+
+delete from sewa where idSewa = 3
